@@ -1,0 +1,258 @@
+page-conversation {
+
+    ion-header.individual-chat {
+        ion-navbar {
+            flex-direction: column !important;
+
+            button {
+                align-self: baseline;
+                margin-top: 5px !important;
+            }
+
+            div.toolbar-content {
+                align-self: left;
+                margin-top: 12px;
+                margin-left: 5px;
+                margin-bottom: 28px;
+                position: relative;
+                left: -72px;
+
+                ion-title {
+                  white-space: nowrap;
+                  width: 62vw;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  text-align: left;
+                }
+            }
+        }
+
+        img.user-photo {
+            position: absolute;
+            top: 40px;
+            right: 30px;
+            width: 100px;
+            height: 100px;
+            z-index: 1;
+            background: #3B3939;
+            padding: 6px;
+        }
+
+        div.status {
+            position: absolute;
+            top: 24px;
+            right: 30px;
+            color: #FFF;
+            text-align: center;
+            width: 100px;
+
+            small.status {
+                display: inline-block;
+                vertical-align: middle;
+                background: #6b6565;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+
+                &.online {
+                    background: #43d243 !important;
+                }
+            }
+
+            span {
+                letter-spacing: 2px;
+                margin-left: 4px;
+                font-size: 10px;
+            }
+        }
+    }
+
+    ion-content {
+        position: relative;
+
+        .chat-container {
+            max-height: 100%;
+            padding: 46px 24px 6px 8px;
+            position: absolute;
+            bottom: 0;
+            display: block;
+            float: left;
+            width: 96%;
+
+            .chat-bubble {
+                position: relative;
+                background: #43b3f0;
+                border-radius: .4em;
+                padding: 8px 16px 8px 12px;
+                font-size: 14px;
+                letter-spacing: 0.65px;
+                font-weight: 400;
+                margin-top: 12px;
+                min-width: 40%;
+                max-width: 80%;
+                display: block;
+                clear: both;
+                margin-bottom: 24px;
+
+                span {
+                    white-space: pre-line;
+                    display: block;
+                }
+
+                &.chat-bubble-me {
+                    background: #FFFFFF;
+                    color: #535353;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    float: right;
+                    text-align: right;
+
+                    small {
+                        font-size: 9px;
+                        font-weight: 100;
+                        display: block;
+                        margin-top: 12px;
+                        position: absolute;
+                        right: 0;
+                        color: #FFFFFF;
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 5px;
+                        width: 0;
+                        height: 0;
+                        border: 0.75em solid transparent;
+                        right: 0;
+                        border-left-color: #FFFFFF;
+                        border-right: 0;
+                        border-top: 0;
+                        margin-top: -0.375em;
+                        margin-right: -0.75em;
+                    }
+
+                    &.succeeding {
+                        margin-top: 0 !important;
+                        border-bottom-right-radius: 0;
+
+                        &:after {
+                            border: none !important;
+                        }
+                    }
+                }
+
+                &.chat-bubble-other {
+                    float: left;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    margin-left: 40px !important;
+
+                    small {
+                        font-size: 9px;
+                        font-weight: 100;
+                        display: block;
+                        margin-top: 12px;
+                        position: absolute;
+                        left: 0;
+                        color: #f4f4f4;
+
+                        &.user-name {
+                          margin-top: 0;
+                          top: -15px;
+                          left: -48px;
+                          color: #f4f4f4;
+                        }
+                    }
+
+                    img.userPhotoUrl {
+                        position: absolute;
+                        top: 0;
+                        left: -48px;
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        top: 5px;
+                        width: 0;
+                        height: 0;
+                        border: 0.75em solid transparent;
+                        left: 0;
+                        border-right-color: #43b3f0;
+                        border-left: 0;
+                        border-top: 0;
+                        margin-top: -0.375em;
+                        margin-left: -0.75em;
+                    }
+
+                    &.succeeding {
+                        margin-top: 0 !important;
+                        border-bottom-left-radius: 0;
+
+                        &:after {
+                            border: none !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    ion-footer {
+        ion-toolbar {
+            padding: 0 4% !important;
+            display: flex;
+            height: 70px;
+            align-items: center;
+
+            ion-textarea {
+                font-size: 16px;
+                color: #FFFFFF;
+
+                textarea {
+                    max-height: 57px;
+                }
+            }
+
+            ion-buttons {
+                button {
+                    color: #43b3f0 !important;
+                }
+
+                &.hide-upload-files-options {
+                  display: none !important;
+                }
+            }
+        }
+    }
+
+    .file-preview-container {
+      border-radius: .4rem;
+      > img {
+        border-radius: .4rem;
+      }
+    }
+
+    .download-thumbnail-container {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 50px;
+      min-height: 100px;
+      border: 1px solid lightslategrey;
+
+      text-align: center;
+
+      > span {
+        font-size: 1.2rem;
+      }
+    }
+
+}

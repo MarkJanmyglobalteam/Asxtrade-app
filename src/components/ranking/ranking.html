@@ -1,0 +1,52 @@
+<!-- Generated template for the RankingComponent component -->
+<div>
+  <ion-segment color="light" [(ngModel)]="selectedSub">
+    <ion-segment-button *ngFor="let sub of rankingSubs" [value]="sub" (click)="onSubActive(sub)">
+      {{sub}}
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div class="preloader" *ngIf="preLoader">
+  <div text-center>
+    <img src="./assets/imgs/preloader.svg">
+    <p>LOADING..</p>
+  </div>
+</div>
+
+<div *ngIf="!preLoader">
+  <table>
+    <tr>
+      <th>Ranking</th>
+      <th>Name</th>
+      <th>Move. %</th>
+    </tr>
+
+    <tbody *ngFor="let rank of ranks">
+      <tr>
+        <td [attr.rowspan]="groupedPortfolio[rank].otherUsers.length + 1">{{ rank }}</td>
+        <td>{{ groupedPortfolio[rank].name }}</td>
+        <td [attr.rowspan]="groupedPortfolio[rank].otherUsers.length + 1" class="percentage-movement {{ groupedPortfolio[rank].status }}">
+          {{ groupedPortfolio[rank].movement ? groupedPortfolio[rank].movement : '...' }}
+        </td>
+      </tr>
+      <tr *ngFor="let userName of groupedPortfolio[rank].otherUsers">
+        <td>{{ userName }}</td>
+      </tr>
+    </tbody>
+
+   <!-- <tbody >
+      <tr>
+        <td [attr.rowspan]="ranks.length+1">1</td>
+        <td>test</td>
+        <td [attr.rowspan]="ranks.length+1" class="percentage-movement ">
+           ...
+        </td>
+      </tr>
+      <tr *ngFor="let rank of ranks">
+        <td>{{rank.userData.username ? rank.userData.username : rank.userData.fullname}}</td>
+      </tr>
+            
+    </tbody> -->
+  </table>
+</div>

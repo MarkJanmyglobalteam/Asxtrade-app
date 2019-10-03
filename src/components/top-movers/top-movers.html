@@ -1,0 +1,43 @@
+<!-- Generated template for the WatchlistComponent component -->
+<div>
+  <ion-segment color="light" [(ngModel)]="moversList" (ionChange)="onSegmentChanged($event)">
+    <!-- <ion-segment-button value="all">
+          All
+      </ion-segment-button> -->
+    <ion-segment-button value="gainers">
+      Gainers
+    </ion-segment-button>
+    <ion-segment-button value="losers">
+      Losers
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div class="preloader" *ngIf="stocks.preLoader && stocks.list">
+  <div text-center>
+    <img src="./assets/imgs/preloader.svg">
+    <p>LOADING..</p>  
+  </div>
+</div>
+
+<div *ngIf="!stocks.preLoader">
+  <p>Top 15 companies</p>
+  <table>
+    <tr>
+      <th>Ticker</th>
+      <th>Price</th>
+      <th>Move. %</th>
+      <th>Volume</th>
+      <th>Ann</th>
+    </tr>
+    <tr *ngFor="let stock of stocks.list" (click)="navigateToStockPage(stock)">
+      <td class="ticker">{{ stock.symbol }}</td>
+      <td>{{ (stock.close && stock.close != 'NA') ? stock.close.toFixed(3): '...' }}</td>
+      <td class="percentage-movement {{ stock.status }}">
+        {{ stock.percentage ? stock.percentage: '...' }}
+      </td>
+      <td class="volume-value">{{ stock.volume ? formatVolume(stock.volume) : '...' }}</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</div>

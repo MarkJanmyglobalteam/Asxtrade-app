@@ -1,0 +1,46 @@
+<ion-content>
+	<ion-row>
+		<ion-col col-lg-4>
+			<ion-slides pager (ionSlideDidChange)="slideChanged()">
+				<ion-slide class="front">
+					<div class="diag">
+						<img src="./assets/imgs/asx-logo.png">
+					</div>
+					<div>
+						<h2>swipe to continue ></h2>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<div class="diag" style="background: url('./assets/imgs/whitebg.svg') no-repeat">
+						<ion-icon ios="ios-analytics" md="md-analytics" color="primary"></ion-icon>
+					</div>
+					<div>
+						<h2>track your routine</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+				</ion-slide>
+		
+				<ion-slide>
+					<div class="diag" style="background: url('./assets/imgs/whitebg.svg') no-repeat">
+						<ion-icon ios="ios-trophy" md="md-trophy" color="primary"></ion-icon>
+					</div>
+					<div>
+						<h2>set personal goals</h2>
+						<p>Cras lacinia nisl venenatis nunc efficitur, ut fermentum tortor rutrum. Donec consequat mi elementum turpis vestibulum blandit.</p>
+					</div>
+				</ion-slide>
+		
+				<ion-slide>
+					<div class="diag" style="background: url('./assets/imgs/whitebg.svg') no-repeat">
+						<ion-icon ios="ios-chatboxes" md="md-chatboxes" color="primary"></ion-icon>
+					</div>
+					<div>
+						<h2>chat with others</h2>
+						<p>Aenean non mattis turpis. Maecenas vitae gravida elit, nec varius diam.</p>
+					</div>
+				</ion-slide>
+			</ion-slides>
+				<button (click)="skip()" id="skip">{{ skipMsg }}</button>
+		</ion-col>
+	</ion-row>
+</ion-content>

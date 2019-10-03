@@ -1,0 +1,135 @@
+page-add-comment-modal {
+    textarea {
+        color: #f4f4f4;
+    }
+    .chat-container {
+        max-height: 100%;
+        padding: 46px 24px 6px 8px;
+        position: absolute;
+        bottom: 0;
+        display: block;
+        float: left;
+        width: 96%;
+
+        .chat-bubble {
+            position: relative;
+            background: #43b3f0;
+            border-radius: .4em;
+            padding: 8px 16px 8px 12px;
+            font-size: 14px;
+            letter-spacing: 0.65px;
+            font-weight: 400;
+            margin-top: 12px;
+            min-width: 40%;
+            max-width: 80%;
+            display: block;
+            clear: both;
+            margin-bottom: 24px;
+
+            span {
+                white-space: pre-line;
+                display: block;
+            }
+
+            &.chat-bubble-me {
+                background: #FFFFFF;
+                color: #535353;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                float: right;
+                text-align: right;
+
+                small {
+                    font-size: 9px;
+                    font-weight: 100;
+                    display: block;
+                    margin-top: 12px;
+                    position: absolute;
+                    right: 0;
+                    color: #FFFFFF;
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 5px;
+                    width: 0;
+                    height: 0;
+                    border: 0.75em solid transparent;
+                    right: 0;
+                    border-left-color: #FFFFFF;
+                    border-right: 0;
+                    border-top: 0;
+                    margin-top: -0.375em;
+                    margin-right: -0.75em;
+                }
+
+                &.succeeding {
+                    margin-top: 0 !important;
+                    border-bottom-right-radius: 0;
+
+                    &:after {
+                        border: none !important;
+                    }
+                }
+            }
+
+            &.chat-bubble-other {
+                float: left;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                margin-left: 40px !important;
+
+                small {
+                    font-size: 9px;
+                    font-weight: 100;
+                    display: block;
+                    margin-top: 12px;
+                    position: absolute;
+                    left: 0;
+                    color: #f4f4f4;
+
+                    &.user-name {
+                      margin-top: 0;
+                      top: -15px;
+                      left: -48px;
+                      color: #f4f4f4;
+                    }
+                }
+
+                img.userPhotoUrl {
+                    position: absolute;
+                    top: 0;
+                    left: -48px;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: 5px;
+                    width: 0;
+                    height: 0;
+                    border: 0.75em solid transparent;
+                    left: 0;
+                    border-right-color: #43b3f0;
+                    border-left: 0;
+                    border-top: 0;
+                    margin-top: -0.375em;
+                    margin-left: -0.75em;
+                }
+
+                &.succeeding {
+                    margin-top: 0 !important;
+                    border-bottom-left-radius: 0;
+
+                    &:after {
+                        border: none !important;
+                    }
+                }
+            }
+        }
+    }
+}

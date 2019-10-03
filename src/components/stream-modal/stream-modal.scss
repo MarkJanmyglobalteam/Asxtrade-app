@@ -1,0 +1,28 @@
+stream-modal {
+	.toolbar {
+		.bar-buttons {
+		    &:nth-child(2) {
+		    	order: 1;
+		    }
+
+		    button {
+				font-weight: 100;
+			    font-size: 12px;
+			    letter-spacing: 2px;
+		    }
+		}
+
+		.toolbar-title {
+			font-weight: 100;
+		    font-size: 16px;
+		    letter-spacing: 2px;
+		}
+	}
+
+	.stream {
+		border-left: 5px #bcbabb solid;
+	}
+	*{
+		color: #f4f4f4;
+	}
+}

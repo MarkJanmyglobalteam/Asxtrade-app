@@ -1,0 +1,40 @@
+page-tabs {
+    .tabbar {
+        background-color: #3B3939 !important;
+    }
+    .tab-button[aria-selected=true] {
+        background-color: #43b3f0;
+        .tab-button-icon {
+            color: #FFF !important;
+        }
+    }
+    .tab-button,
+    .tab-button-icon {
+        color: #bcbabb !important;
+        &:hover:not(.disable-hover),
+        &[aria-selected=true] {
+            // color: #43b3f0!important;
+        }
+    }
+    .tabs-md[tabshighlight="true"] .tab-highlight {
+        top: initial !important;
+        background-color: #43b3f0 !important;
+        height: 4px;
+    }
+    .verify-email {
+        position: absolute;
+        z-index: 9;
+        bottom: 6rem;
+        width: 100%;
+        height: 20%;
+        background: #f4f4f4;
+        color: #535353;
+        padding: 10px;
+    }
+    .verify-email a {
+        color: #164A70;
+    }
+}
+
+// #43b3f0
+// #bcbabb

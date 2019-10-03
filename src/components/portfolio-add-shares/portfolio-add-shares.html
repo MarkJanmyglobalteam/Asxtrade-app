@@ -1,0 +1,84 @@
+<!-- Generated template for the StreamModalComponent component -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!-- <ion-title>{{ stock?.name }} ({{ isSelling ? 'Sell' : 'Buy' }})</ion-title> -->
+    <ion-title>{{ stock?.name }}</ion-title>
+
+    <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="saveShares()" [disabled]="shareCount.invalid || tradeDate.invalid || !isValidShareCount" *ngIf="!isSelling">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content no-padding class="bg-image">
+  <div class="form-container">
+    <ion-item class="input-container" no-padding>
+      <ion-label floating>Shares</ion-label>
+      <ion-input type="number" id="shareCount" [(ngModel)]="share.shareCount" min="1" required #shareCount="ngModel"></ion-input>
+    </ion-item>
+    <ion-item class="input-container" no-padding>
+      <ion-label floating>Trade Date</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="share.tradeDate" max="{{ currentDate }}" required #tradeDate="ngModel"></ion-datetime>
+    </ion-item>
+    <ion-item class="input-container" no-padding>
+      <ion-label floating>Notes</ion-label>
+      <ion-textarea [(ngModel)]="share.notes"></ion-textarea>
+    </ion-item>
+    <button ion-button block color="secondary" (click)="saveShares()" [disabled]="shareCount.invalid || tradeDate.invalid || !isValidShareCount" *ngIf="!isSelling">
+     BUY
+    </button>
+  </div>
+  <br>
+  <br>
+  <div class="selling-details" *ngIf="isSelling">
+    <ion-row no-padding>
+      <ion-item class="input-container" no-padding>
+        <ion-label floating>Buy Date</ion-label>
+        <ion-input [value]="formatDate(soldShare?.tradeDate)" readonly></ion-input>
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 no-padding>
+        <ion-item class="input-container" no-padding>
+          <ion-label floating>Shares Held</ion-label>
+          <ion-input [value]="soldShare?.shareCount" readonly></ion-input>
+        </ion-item>
+        <ion-item class="input-container" no-padding>
+          <ion-label floating>Acquired Price</ion-label>
+          <ion-input [value]="'$'+formatNumber(soldShare?.closeValue,3)" readonly></ion-input>
+        </ion-item>
+        <ion-item class="input-container" no-padding>
+          <ion-label floating>Acquired Value</ion-label>
+          <ion-input [value]="'$'+formatNumber(soldShare?.calculateAcqValue())" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6 no-padding>
+        <ion-item class="input-container" no-padding>
+          <ion-label floating>Value</ion-label>
+          <ion-input [value]="'$'+formatNumber(soldShare?.calculateMarketValue(stock.close))" readonly></ion-input>
+        </ion-item>
+        <ion-item class="input-container" no-padding>
+          <ion-label floating>Profit</ion-label>
+          <ion-input [value]="'$'+formatNumber(soldShare?.calculateProfit(stock.close))" readonly></ion-input>
+        </ion-item>
+        <ion-item class="input-container" no-padding>
+          <ion-label floating>Profit %</ion-label>
+          <ion-input [value]="formatNumber(soldShare?.calculateProfitPercent(stock.close))+'%'" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <button ion-button class="sell-button" (click)="saveShares()" [disabled]="shareCount.invalid || tradeDate.invalid || !isValidShareCount">Sell</button>
+
+  </div>
+
+
+</ion-content>

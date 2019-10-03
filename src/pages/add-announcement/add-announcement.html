@@ -1,0 +1,58 @@
+<!--
+  Generated template for the AddAnnouncementPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Make an announcement</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bg-image">
+    <div class="form-container">
+        <!-- <form (ngSubmit)="saveAnnouncement(f.value)" #f="ngForm"> -->
+            <!-- <ion-item class="input-container" no-padding>
+                <ion-input name="header" placeholder="Announcement header" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item class="input-container" no-padding>
+
+                <ion-textarea placeholder="What would you like to announce?" name="body" ngModel required></ion-textarea>
+            </ion-item>
+            <button color="light" ion-button icon-end type="submit" [disabled]="!f.valid">
+              Submit
+              <ion-icon ios="ios-megaphone" md="ios-megaphone" item-start></ion-icon>
+            </button> -->
+   
+            <ion-item class="input-container" no-padding>
+                    <ion-input [(ngModel)]="announcement.header" name="header" placeholder="Announcement header" type="text"  required></ion-input>
+                </ion-item>
+                <ion-item class="input-container" padding>
+                      <div contenteditable="true" id="body" placeholder="What would you like to announce?" style="min-height: 300px;" (input)="announcement.body = $event.target.innerHTML">
+
+                      </div>                  
+                </ion-item>
+                <button color="light" (click)="addLink()" ion-button icon-end type="submit" [disabled]="">
+                        Add Link
+                        <ion-icon ios="add-circle-outline" md="add-circle-outline" item-start></ion-icon>
+                </button>
+                <button color="light" (click)="saveAnnouncement(announcement)" ion-button icon-end type="submit" [disabled]="!announcement.header || !announcement.body">
+                  Submit
+                  <ion-icon ios="ios-megaphone" md="ios-megaphone" item-start></ion-icon>
+                </button>
+
+    </div>
+
+    <!-- <ion-label color="primary" floating>Announcement</ion-label>
+    <ion-item>
+        <ion-textarea [(ngModel)]="announcement" style="height: 300px;" placeholder="What would you like to announce?"></ion-textarea>
+    </ion-item>
+
+    <button (click)="saveAnnouncement()" ion-button icon-end>
+      Submit
+      <ion-icon ios="ios-megaphone" md="ios-megaphone" item-start></ion-icon>
+    </button> -->
+</ion-content>

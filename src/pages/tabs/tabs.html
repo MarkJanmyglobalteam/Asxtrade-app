@@ -1,0 +1,14 @@
+<!-- <div class="verify-email" *ngIf="!isEmailVerified">
+    <h5>Please verify your email address.</h5>
+
+    <a (click)="sendVerificationEmail()">Click here to send verification email</a>
+    <br>
+    <p>{{emailVerifyMessage}}</p>
+</div> -->
+
+<ion-tabs>
+    <ion-tab color="light" [root]="stocksRoot" tabIcon="pulse"></ion-tab>
+    <ion-tab [root]="notificationsRoot" tabIcon="notifications" [tabBadge]="notifProvider.unreadNotifications.length"></ion-tab>
+    <ion-tab [root]="chatRoot" tabIcon="chatboxes" [tabBadge]="unreadMessageCount"></ion-tab>
+    <ion-tab [root]="accountRoot" tabIcon="contact"></ion-tab>
+</ion-tabs>

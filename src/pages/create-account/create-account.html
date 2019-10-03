@@ -1,0 +1,41 @@
+<!--
+  Generated template for the CreateAccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create Account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bg-image">
+ 
+  <div  class="form-container">
+    <form (ngSubmit)="submitRegistration(f.value)" #f="ngForm">
+      <ion-item class="input-container" no-padding>
+        <ion-label floating>First Name</ion-label>
+        <ion-input name="firstName" type="text" ngModel required></ion-input>
+      </ion-item>
+      <ion-item class="input-container" no-padding>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input name="lastName" type="text" ngModel required></ion-input>
+      </ion-item>
+      <ion-item class="input-container" no-padding>
+        <ion-label floating>User Name</ion-label>
+        <ion-input name="username" type="text" ngModel required></ion-input>
+      </ion-item>
+      <ion-item class="input-container" no-padding>
+        <ion-label floating>Email</ion-label>
+        <ion-input name="email" ngModel type="email" required></ion-input>
+      </ion-item>
+      <ion-item class="input-container" no-padding>
+        <ion-label floating>Password</ion-label>
+        <ion-input name="password" ngModel type="password" required></ion-input>
+      </ion-item>
+      <button class="register-button" ion-button block round outline type="submit" [disabled]="!f.valid">Register</button>
+    </form>
+  </div>
+</ion-content>

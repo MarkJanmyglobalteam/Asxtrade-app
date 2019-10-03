@@ -1,0 +1,355 @@
+<ion-header class="stockview-header main-header">
+    <ion-navbar color="main" class="stockview-navbar">
+        <ion-title>{{ stock.name }}</ion-title>
+    </ion-navbar>
+    <ion-segment color="light" [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+        <ion-segment-button value="asm">
+            <ion-icon name="phone-portrait" color="light" class="segment-icon"></ion-icon> &nbsp;Direct
+        </ion-segment-button>
+        <ion-segment-button value="twitter">
+            <ion-icon name="logo-twitter" color="light" class="segment-icon"></ion-icon> &nbsp;Twitter
+        </ion-segment-button>
+        <ion-segment-button value="company">
+            <ion-icon name="paper" color="light" class="segment-icon"></ion-icon> &nbsp;Company
+        </ion-segment-button>
+        <ion-segment-button value="announcements">
+            <ion-icon name="megaphone" color="light" class="segment-icon"></ion-icon> &nbsp;Announcements
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+
+<ion-content class="bg-image">
+    
+	<div class="section-lockup">
+		<div class="stock-lockup {{ stock.status }}">
+			<ion-row>
+				<ion-col col-8>
+          <h4>TICKER: {{ stock.symbol }}</h4>
+		<ng-template [ngIf]="stock.status">
+            <!-- <button class="stock-action-button" ion-button *ngIf="stock.watched;else ToWatchList" (click)="removetoWatchlist(stock)">Remove from Watchlist</button> -->
+            
+              <!-- <button class="stock-action-button" ion-button (click)="addtoWatchlist(stock)">Add to Watchlist</button> -->
+           
+            <button color="light" class="stock-action-button" ion-button (click)="chooseActionWatchlist(stock.symbol)" >Watchlist</button>
+            <button color="light" class="stock-action-button" ion-button (click)="chooseActionPortfolio(stock)" >Portfolio</button>
+            
+
+            <!-- <button class="stock-action-button" ion-button *ngIf="stock.portfolioId" (click)="removetoPortfolio(stock)">Remove from Portfolio</button> -->
+            
+            <!-- <button class="stock-action-button" [hidden] = "userPortfolios.length >= 3" ion-button (click)="addtoPortfolio(stock)">Add to Portfolio</button> -->
+            <!-- <ng-template #ToPortfolio>
+              <button class="stock-action-button" ion-button (click)="addtoPortfolio(stock)">Add to Portfolio</button>
+            </ng-template> -->
+          </ng-template>
+				</ion-col>
+				<ion-col *ngIf="stock.close != null">
+					<h1>{{ stock.close }}</h1>
+					<h4 class="stock_counts {{ stock.status }}">
+						<span *ngIf="stock.change != 'NA'">
+							<ion-icon name="arrow-dropup" *ngIf="stock.status == 'up'"></ion-icon>
+							<ion-icon name="arrow-dropdown" *ngIf="stock.status == 'down'"></ion-icon>
+						</span> {{ stock.change }}
+                        <span *ngIf="stock.change != 'NA'">({{ stock.percentage }})</span>
+                    </h4>
+                </ion-col>
+                <ion-col *ngIf="!stock.close">
+                    <div class="open animated-background"></div>
+                    <div class="change animated-background"></div>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
+    <div [ngSwitch]="selectedSegment">
+        <div *ngSwitchCase="'asm'">
+            <div padding class="empty-list-message-container" *ngIf="stock.streams.length === 0">
+                <h2>There seems to be no discussion here yet. Be the first to post!</h2>
+            </div>
+            <ion-card class="stream" *ngFor="let post of stock.streams">
+                <div *ngIf="post.user && (post.post != undefined)">
+                    <ion-item>
+                        <ion-avatar item-start (click)="viewUserProfile(post.userid)">
+                            <img [offset]="offset" [defaultImage]="defaultPhotoUrl" [lazyLoad]="post.user.photoUrl" alt="{{ post.user.firstname + ' ' + post.user.lastname }}" class="userPhoto">
+                        </ion-avatar>
+                        <h2 (click)="viewUserProfile(post.userid)">{{ post.user.firstname }} {{ post.user.lastname || '' }}</h2>
+                        <p><span><ion-icon name="logo-twitter" [hidden]="!post.tweet" color="primary"></ion-icon></span> {{ post.timeago }}</p>
+                        <!-- <p>{{ post.timestamp }}</p> -->
+                    </ion-item>
+
+                    <ion-card-content>
+                        <p [innerHTML]="post.post | bypassSanitizer" class="post-container"></p>
+
+                        <div class="repost" *ngIf="post.sharedPost">
+                            <ion-card class="stream" *ngIf="post.sharedPost.user && (post.sharedPost.post != undefined)">
+                                <ion-item>
+                                    <h2>{{ post.sharedPost.user.firstname + ' ' + post.sharedPost.user.lastname }}</h2>
+                                    <p>{{ post.sharedPost.timeago }}</p>
+                                </ion-item>
+
+                                <ion-card-content>
+                                    <p [innerHTML]="post.sharedPost.post"></p>
+                                </ion-card-content>
+                            </ion-card>
+                        </div>
+                    </ion-card-content>
+
+                    <ion-row *ngIf="!post.tweet">
+                        <ion-col>
+                            <button ion-button icon-left clear small [ngClass]="{ 'active': post.liked }" (click)="post.like()">
+								<ion-icon name="thumbs-up"></ion-icon> <span *ngIf="post.likes.length">{{ post.likes.length }}</span>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="post.shareToSocial()">
+								<ion-icon name="redo"></ion-icon> <span *ngIf="post.shares.length">{{ post.shares.length }}</span>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="fetchComments(post)">
+								<ion-icon name="text"></ion-icon> <span *ngIf="post.commentsLength">{{ post.commentsLength }}</span>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="post.settings()">
+								<ion-icon name="cog"></ion-icon>
+							</button>
+                        </ion-col>
+                    </ion-row>
+                </div>
+
+                <div *ngIf="!post.user || (post.post == undefined)">
+                    <ion-item>
+                        <div class="animated-background user"></div>
+                    </ion-item>
+
+                    <ion-card-content>
+                        <div class="animated-background"></div>
+                        <div class="animated-background"></div>
+                        <div class="animated-background"></div>
+                    </ion-card-content>
+                </div>
+
+                <div class="comment-container">
+                    <h4 *ngIf="post.param.comments.length" class="comments-label" padding>Comments</h4>
+                    <ion-list [hidden]="!post.param.comments.length">
+                        <ion-item *ngFor="let c of post.param.comments">
+                            <ion-avatar item-start>
+                                <img [src]="c.user?.photoUrl || defaultPhotoUrl">
+                            </ion-avatar>
+                            <p>
+                                <span class="comment-name">{{c.user.firstname}} {{c.user.lastname || ''}}</span>
+                                <!-- <span class="comment-message">{{c.message}}</span> -->
+                            </p>
+                            <p style="font-size: 10px;">{{c.created_at_formatted}}</p>
+                            <p *ngIf="c.message" class="comment-message">{{c.message}}</p>
+                            <img *ngIf="c.file && c.file?.contentType.startsWith('image')" [src]="c.file.downloadUrl" alt="">
+                        </ion-item>
+                    </ion-list>
+                    <div class="add-comment-container" (click)="showCommentPrompt(post)">
+                        Add a comment...
+                    </div>
+                </div>
+            </ion-card>
+        </div>
+        <div *ngSwitchCase="'twitter'">
+            <div padding class="empty-list-message-container" *ngIf="tweets.length === 0 && !isRetrievingData">
+                <h2>No recent tweets for {{ stock.name }}</h2>
+            </div>
+            <ion-card class="stream" *ngFor="let post of tweets">
+                <div *ngIf="post.user && (post.post != undefined)">
+                    <ion-item>
+                        <ion-avatar item-start>
+                            <img [src]="post.user.photoUrl" alt="{{ post.user.firstname + ' ' + post.user.lastname }}" class="userPhoto">
+                        </ion-avatar>
+                        <h2>{{ post.user.firstname }} {{ post.user.lastname || '' }}</h2>
+                        <p><span><ion-icon name="logo-twitter" [hidden]="!post.tweet" color="primary"></ion-icon></span> {{ post.timeago }}</p>
+                        <!-- <p>{{ post.timestamp }}</p> -->
+                    </ion-item>
+
+                    <ion-card-content>
+                        <p [innerHTML]="post?.post | bypassSanitizer" class="post-container"></p>
+
+                        <div class="repost" *ngIf="post.sharedPost">
+                            <ion-card class="stream" *ngIf="post.sharedPost.user && (post.sharedPost.post != undefined)">
+                                <ion-item>
+                                    <h2>{{ post.sharedPost.user.firstname + ' ' + post.sharedPost.user.lastname }}</h2>
+                                    <p>{{ post.sharedPost.timeago }}</p>
+                                </ion-item>
+
+                                <ion-card-content>
+                                    <p [innerHTML]="post.sharedPost.post"></p>
+                                </ion-card-content>
+                            </ion-card>
+                        </div>
+                    </ion-card-content>
+
+                    <ion-row class="info">
+                        <ion-col center text-center *ngIf="post.likes.length" col-3>
+                            <button ion-button icon-left clear small>
+								{{ post.likes.length > 1 ? post.likes.length + ' Likes' : post.likes.length + ' Like' }}
+							</button>
+                        </ion-col>
+                        <ion-col center text-center *ngIf="post.retweets.length" col-3>
+                            <button ion-button icon-left clear small>
+								{{ post.retweets.length > 1 ? post.retweets.length + ' Retweets' : post.retweets.length + ' Retweet' }}
+							</button>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row *ngIf="!post.tweet">
+                        <ion-col>
+                            <button ion-button icon-left clear small [ngClass]="{ 'active': post.liked }" (click)="post.like()">
+								<ion-icon name="thumbs-up"></ion-icon>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="post.shareToSocial()">
+								<ion-icon name="redo"></ion-icon>
+							</button>
+
+                            <button ion-button icon-left clear small>
+								<ion-icon name="text"></ion-icon>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="post.settings()">
+								<ion-icon name="cog"></ion-icon>
+							</button>
+                        </ion-col>
+                    </ion-row>
+                </div>
+
+                <div *ngIf="!post.user || (post.post == undefined)">
+                    <ion-item>
+                        <div class="animated-background user"></div>
+                    </ion-item>
+
+                    <ion-card-content>
+                        <div class="animated-background"></div>
+                        <div class="animated-background"></div>
+                        <div class="animated-background"></div>
+                    </ion-card-content>
+                </div>
+            </ion-card>
+        </div>
+        <div *ngSwitchCase="'company'">
+            <div padding class="empty-list-message-container" *ngIf="timelineTweets.length === 0 && !isRetrievingData">
+                <h2>{{ stock.name }} hasn't tweeted recently</h2>
+            </div>
+            <ion-card class="stream" *ngFor="let post of timelineTweets">
+                <div *ngIf="post.user && (post.post != undefined)">
+                    <ion-item>
+                        <ion-avatar item-start>
+                            <img [src]="post.user.photoUrl" alt="{{ post.user.firstname + ' ' + post.user.lastname }}" class="userPhoto">
+                        </ion-avatar>
+                        <h2>{{ post.user.firstname }} {{ post.user.lastname || '' }}</h2>
+                        <p><span><ion-icon name="logo-twitter" [hidden]="!post.tweet" color="primary"></ion-icon></span> {{ post.timeago }}</p>
+                        <!-- <p>{{ post.timestamp }}</p> -->
+                    </ion-item>
+
+                    <ion-card-content>
+                        <p [innerHTML]="post?.post | bypassSanitizer" class="post-container"></p>
+
+                        <div class="repost" *ngIf="post.sharedPost">
+                            <ion-card class="stream" *ngIf="post.sharedPost.user && (post.sharedPost.post != undefined)">
+                                <ion-item>
+                                    <h2>{{ post.sharedPost.user.firstname + ' ' + post.sharedPost.user.lastname }}</h2>
+                                    <p>{{ post.sharedPost.timeago }}</p>
+                                </ion-item>
+
+                                <ion-card-content>
+                                    <p [innerHTML]="post.sharedPost.post"></p>
+                                </ion-card-content>
+                            </ion-card>
+                        </div>
+                    </ion-card-content>
+
+                    <ion-row class="info">
+                        <ion-col center text-center *ngIf="post.likes.length" col-3>
+                            <button ion-button icon-left clear small>
+								{{ post.likes.length > 1 ? post.likes.length + ' Likes' : post.likes.length + ' Like' }}
+							</button>
+                        </ion-col>
+                        <ion-col center text-center *ngIf="post.retweets.length" col-3>
+                            <button ion-button icon-left clear small>
+								{{ post.retweets.length > 1 ? post.retweets.length + ' Retweets' : post.retweets.length + ' Retweet' }}
+							</button>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row *ngIf="!post.tweet">
+                        <ion-col>
+                            <button ion-button icon-left clear small [ngClass]="{ 'active': post.liked }" (click)="post.like()">
+								<ion-icon name="thumbs-up"></ion-icon>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="post.shareToSocial()">
+								<ion-icon name="redo"></ion-icon>
+							</button>
+
+                            <button ion-button icon-left clear small>
+								<ion-icon name="text"></ion-icon>
+							</button>
+
+                            <button ion-button icon-left clear small (click)="post.settings()">
+								<ion-icon name="cog"></ion-icon>
+							</button>
+                        </ion-col>
+                    </ion-row>
+                </div>
+
+                <div *ngIf="!post.user || (post.post == undefined)">
+                    <ion-item>
+                        <div class="animated-background user"></div>
+                    </ion-item>
+
+                    <ion-card-content>
+                        <div class="animated-background"></div>
+                        <div class="animated-background"></div>
+                        <div class="animated-background"></div>
+                    </ion-card-content>
+                </div>
+            </ion-card>
+        </div>
+        <div *ngSwitchCase="'announcements'">
+            <div padding class="empty-list-message-container" *ngIf="announcements.length === 0 && !isRetrievingData">
+                <h2>No announcements found for {{ stock.name }}</h2>
+            </div>
+            <ion-list>
+                <ion-item-group *ngFor="let announcement of announcements" class="announcement-container">
+                    <ion-item-divider color="dark" class="announcement-header">{{ announcement.date }}</ion-item-divider>
+                    <button ion-item *ngFor="let announcementItem of announcement.announcements" (click)="openPdf(announcementItem.pdfUrl)">
+            <ion-grid>
+              <ion-row>
+                <ion-col col-3>
+                  {{ announcementItem.time }}
+                </ion-col>
+                <ion-col col-8 class="announcement-headline">
+                  {{ announcementItem.headline }}
+                </ion-col>
+                <ion-col col-1 class="announcement-chevron-container">
+                  <ion-icon ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </button>
+                </ion-item-group>
+            </ion-list>
+        </div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="stock.loadMoreStreams($event, selectedSegment)" *ngIf="stock.streamCount < stock.streamTotal && stock.streamScrollStatus && selectedSegment === 'asm'">
+        <ion-infinite-scroll-content loadingSpinner="circles" loadingText="Loading..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-infinite-scroll (ionInfinite)="loadMoreTweets($event)" *ngIf="selectedSegment === 'twitter' && hasMoreTweets">
+        <ion-infinite-scroll-content loadingSpinner="circles" loadingText="Fetching tweets..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <!-- <ion-fab right bottom [hidden]="selectedSegment === 'asm' || selectedSegment === 'company' || selectedSegment === 'announcements'">
+		<button ion-fab icon-only (click)="openTweetModal()">
+			<ion-icon name='logo-twitter'></ion-icon>
+		</button>
+	</ion-fab> -->
+
+    <ion-fab right bottom [hidden]="selectedSegment === 'twitter' || selectedSegment === 'company' || selectedSegment === 'announcements'">
+        <button color="light" ion-fab icon-only (click)="stock.addStream()">
+			<ion-icon name='create'></ion-icon>
+		</button>
+    </ion-fab>
+</ion-content>

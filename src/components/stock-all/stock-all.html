@@ -1,0 +1,31 @@
+<!-- Generated template for the StockAllComponent component -->
+<ion-list>
+	 <!-- (click)="itemSelected(item)" -->
+	<button ion-item *ngFor="let stock of stocks.list" [navPush]="stockPage" [navParams]="stock">
+		<ion-row>
+    		<ion-col col-8>
+        		<h1>{{ stock.symbol }} </h1>
+        		<h4>{{ stock.name }}</h4>
+    		</ion-col>
+            <ion-col *ngIf="stock.close != null">
+                <h1>{{ stock.close }}</h1>
+                <h4 class="stock_counts {{ stock.status }}">
+                	<span *ngIf="stock.change != 'NA'">
+	                	<ion-icon name="arrow-dropup" *ngIf="stock.status == 'up'"></ion-icon>
+	                	<ion-icon name="arrow-dropdown" *ngIf="stock.status == 'down'"></ion-icon>
+	                </span>
+	                {{ stock.change }}
+                	<span *ngIf="stock.change != 'NA'">({{ stock.percentage }})</span>
+                </h4>
+            </ion-col>
+            <ion-col *ngIf="!stock.close">
+                <div class="open animated-background"></div>
+                <div class="change animated-background"></div>
+            </ion-col>
+        </ion-row>
+    </button>
+</ion-list>
+
+<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="stocks.list.length < stocks.totalPage">
+	<ion-infinite-scroll-content loadingSpinner="circles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+</ion-infinite-scroll>

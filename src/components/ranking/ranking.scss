@@ -1,0 +1,40 @@
+ranking {
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+    }
+    table {
+        width: 100%;
+        overflow: scroll;
+        position: absolute;
+        left: 0;
+        th,
+        td {
+            border: 1px solid #f4f4f4;
+            width: 20%;
+            text-align: center;
+            &.percentage-movement {
+                .up,
+                .down {
+                    font-weight: 500;
+                    margin-right: 4px;
+                }
+            }
+        }
+        th,
+        td {
+            height: auto;
+            padding: 4px 8px !important;
+        }
+    } // .volume-value {
+    //     text-align: right;
+    // }
+    .up {
+        color: green;
+    }
+    .down {
+        color: red;
+        font: fantasy;
+    }
+}

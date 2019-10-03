@@ -1,0 +1,28 @@
+page-home {
+	background: #343434;
+	color: #CDCDCD;
+	position: relative;
+
+	header {
+		text-align: center;
+		padding-top: 80px;
+
+		img {
+			// width: 80%;
+   			height: 120px;
+		}
+	}
+	
+	.preloader {
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		text-align: center;
+
+		p {
+			letter-spacing: 2px;
+		}
+	}
+}

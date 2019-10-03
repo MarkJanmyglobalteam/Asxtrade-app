@@ -1,0 +1,61 @@
+<!--
+  Generated template for the AddWatchlistModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button color="light" ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+    <ion-title>Add to Watchlist</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="bg-image">
+  <ion-list>
+    <ion-list-header>
+      Watchlists
+    </ion-list-header>
+    <!-- <ion-item-sliding *ngFor="let item of watchlists ; let i = index">
+      <ion-item >
+        <ion-label >{{item}}</ion-label>
+        <button *ngIf="stockUserWatchlists.indexOf(item) > -1" class="checkedWatchlist" ion-button outline icon-only item-end  >
+            <ion-icon color="secondary" name="ios-checkmark"></ion-icon>
+        </button>
+        <button [hidden]="stockUserWatchlists.indexOf(item) > -1" ion-button outline item-end (click)="addToWatchlist(item , i)">Add</button>
+      </ion-item>
+      <ion-item-options side="left">
+          <button class="delete" ion-button color="danger" (click)="remove(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding> -->
+    <ion-item-sliding *ngFor="let watchlist of userWatchListBoards; let i = index">
+      <ion-item >
+        <ion-label >{{watchlist}}</ion-label>
+        <button *ngIf="isAdded(watchlist)" color="danger" ion-button outline item-end  (click)="removeToWatchlist(watchlist)">Remove</button>
+
+        <button [hidden]="isAdded(watchlist)" ion-button outline item-end (click)="addToWatchlist(watchlist , i)">Add</button>
+      </ion-item>
+      <ion-item-options side="left">
+          <button class="delete" ion-button color="danger" (click)="remove(watchlist)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item *ngIf="userWatchListBoards.length<3 && !isCreating">
+      <button ion-button icon-start (click)="createWatchlist()">
+        <ion-icon name="add"></ion-icon>
+        Create
+      </button>
+    </ion-item>
+    <ion-item *ngIf="userWatchListBoards.length<3 && isCreating">
+      <ion-input placeholder="List name" [(ngModel)]="listName"></ion-input>
+      <button ion-button outline item-end (click)="create(listName)">Create</button>
+      <button ion-button outline item-end (click)="closeCreate()">Cancel</button>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

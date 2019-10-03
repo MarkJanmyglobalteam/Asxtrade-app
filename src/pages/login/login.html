@@ -1,0 +1,72 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div class="web">
+
+<header>
+    <img src="./assets/imgs/asx-logo.png">
+</header>
+    <main>
+        <ion-row>
+            <ion-col col-lg-12 col-md-12 col-s-12 col-xs-12 style="margin: auto">
+                <ion-item>
+                    <ion-label color="primary" fixed>
+                        <ion-icon name="ios-contact-outline"></ion-icon>
+                    </ion-label>
+                    <ion-input placeholder="Your Email" [(ngModel)]="user.email"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 style="margin: auto">
+                <ion-item>
+                        <ion-label color="primary" fixed>
+                            <ion-icon name="ios-lock-outline"></ion-icon>
+                        </ion-label>
+                        <ion-input type="password" placeholder="Your Password" [(ngModel)]="user.password"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 style="margin: auto">
+                <button class="login" light ion-button round (click)="signIn(null, user)">Login</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 style="margin: auto">
+                <button class="create-account" ion-button round outline (click)="register()">Create Account</button>
+            </ion-col>
+        </ion-row>
+
+
+    </main>
+
+    <footer>
+        <!-- <ion-row>
+            <ion-col col-lg-5 col-md-12 col-sm-12 col-xs-12 style="margin: auto">
+                <div class="social-login-container" style="display:table; margin: auto">
+                    <span>OR YOU CAN LOGIN WITH:</span>
+                    <div class="social-login">
+                        <button ion-button icon-only class="facebook" (click)="signIn('facebook')">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </button>
+                        <button ion-button icon-only class="twitter" (click)="signIn('twitter')">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </button>
+                        <button ion-button icon-only class="google" (click)="signIn('google')">
+                            <ion-icon name="logo-google"></ion-icon>
+                        </button>
+                    </div>
+                    </div>
+            </ion-col>
+        </ion-row> -->
+
+        <button color="light" ion-button block clear (click)="onClickResetPassword()" class="btn-forgot-password">
+            FORGOT PASSWORD
+        </button>
+    </footer>
+</div>

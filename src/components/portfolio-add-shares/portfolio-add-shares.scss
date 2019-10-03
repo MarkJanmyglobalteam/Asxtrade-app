@@ -1,0 +1,22 @@
+portfolio-add-shares {
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .input-container {
+        background-color: transparent;
+    }
+    .form-container,
+    .selling-details {
+        padding: 0 32px;
+        .sell-button {
+            width: 100%;
+            background-color: red;
+            margin-top: 1em;
+        }
+    }
+    *{
+        color: #f4f4f4;
+    }
+}

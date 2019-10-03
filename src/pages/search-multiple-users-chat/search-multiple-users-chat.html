@@ -1,0 +1,78 @@
+<!--
+  Generated template for the SearchMultipleUsersChatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="main">
+      <ion-title>Create Group Chat</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item class="group-name-input">
+    <ion-input
+      [(ngModel)]="groupNameBar.name"
+      [placeholder]="groupNameBar.placeholder">
+    </ion-input>
+    <button color="dark" ion-button clear item-right (click)="startGroupConversation()" [disabled]="selectedUsers.length < 2 || groupNameBar.name.trim().length === 0">Create</button>
+  </ion-item>
+  <ion-searchbar
+    [(ngModel)]="searchBar.name"
+    [placeholder]="searchBar.placeholder"
+    debounce="1000"
+    (ionInput)="search(searchBar.name)"
+    (cancel)="cancel($event)"
+    (clear)="cancel($event)">
+  </ion-searchbar>
+
+  <!-- List of selected users -->
+  <ion-list>
+    <ion-item class="user-container" *ngFor="let user of selectedUsers">
+      <ion-row>
+        <ion-col class="column-container" col-10>
+          <ion-item class="user-info">
+            <ion-avatar item-start>
+                <img [src]="user.photoUrl" />
+              </ion-avatar>
+            <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+            <p>{{ user.email }}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col class="column-container" col-2>
+          <ion-item>
+            <ion-checkbox  color="light" [(ngModel)]="user.selected" (ionChange)="removeToSelectedUserList(user)"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <!-- List of search result users -->
+  <ion-list>
+    <ng-container *ngFor="let user of searchResultUsers">
+      <ion-item class="user-container" *ngIf="!user.selected">
+        <ion-row>
+          <ion-col class="column-container" col-10>
+            <ion-item class="user-info">
+              <ion-avatar item-start>
+                  <img [src]="user.photoUrl" />
+                </ion-avatar>
+              <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+              <p>{{ user.email }}</p>
+            </ion-item>
+          </ion-col>
+          <ion-col class="column-container" col-2>
+            <ion-item>
+              <ion-checkbox color="light" [(ngModel)]="user.selected" (ionChange)="includeToSelectedUserList(user)"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

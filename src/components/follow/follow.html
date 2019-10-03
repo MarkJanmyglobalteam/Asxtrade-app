@@ -1,0 +1,21 @@
+<!-- Generated template for the FollowComponent component -->
+<ion-list>
+	 <!-- (click)="itemSelected(item)" -->
+	<button ion-item *ngFor="let user of users.list">
+		<ion-row>
+    		<ion-col col-3>
+    			<img src="{{ user.photoUrl}}" alt="{{ user.firstname + ' ' + user.lastname }}" class="userPhoto">
+    		</ion-col>
+            <ion-col class="user-inf-col">
+            	<div>
+					<span class="name">{{ user.firstname + ' ' + user.lastname }}</span>
+					<span class="email">{{ user.email }}</span>
+				</div>
+            </ion-col>
+        </ion-row>
+    </button>   
+</ion-list>
+<!-- 
+<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="stocks.list.length < stocks.totalPage">
+	<ion-infinite-scroll-content loadingSpinner="circles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+</ion-infinite-scroll> -->

@@ -1,0 +1,73 @@
+<!-- Generated template for the WatchlistComponent component -->
+
+<div *ngIf="watchlistBoards?.length > 1">
+  <ion-segment [(ngModel)]="selectedBoard" color="light">
+    <ion-segment-button *ngFor="let board of watchlistBoards" [value]="board" (click)="onBoardChanged(board)">
+      {{board}}
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div class="preloader" *ngIf="stocks.preLoader">
+  <div text-center>
+  
+    <img src="./assets/imgs/preloader.svg">
+    <p>LOADING..</p>
+  </div>
+</div>
+
+<div  *ngIf="!stocks.preLoader && stocks.list.length === 0">
+  <h2>You don't have any items on your {{selectedBoard}} watchlist!</h2>
+  <p>Tap any ticker you want, and add to watchlist</p>
+
+</div>
+<!-- <p> {{ stocks | json }} </p> -->
+<table *ngIf="!stocks.preLoader && stocks.list.length > 0 ">
+  <tr>
+    <th>Ticker</th>
+    <th>Price</th>
+    <th>Move. %</th>
+    <th>Volume</th>
+    <th>Ann {{test}}</th>
+  </tr>
+  <tr *ngFor="let stock of stocks.list" (click)="navigateToStockPage(stock)">
+    <td class="ticker">{{ stock.symbol }} </td>
+    <td>{{ (stock.close && stock.close != 'NA') ? stock.close.toFixed(3): '...' }}</td>
+    <td class="percentage-movement {{ stock.status }}">
+      <!-- <span class="{{ stock.status }}" *ngIf="stock.change != 'NA'">
+        <ion-icon name="arrow-dropup" *ngIf="stock.status == 'up'"></ion-icon>
+        <ion-icon name="arrow-dropdown" *ngIf="stock.status == 'down'"></ion-icon>
+      </span> -->
+      {{ stock.percentage ? stock.percentage: '...' }}
+    </td>
+    <td class="volume-value">{{ stock.volume ? formatVolume(stock.volume) : '...' }}</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+<!-- Old view -->
+<!-- <ion-list *ngIf="!stocks.preLoader && stocks.list.length > 0">
+  <button ion-item *ngFor="let stock of stocks.list" [navPush]="stockPage" [navParams]="stock">
+    <ion-row>
+      <ion-col col-8>
+        <h1>{{ stock.symbol }} </h1>
+        <h4>{{ stock.name }}</h4>
+      </ion-col>
+      <ion-col *ngIf="stock.close != null">
+        <h1>{{ stock.close }}</h1>
+        <h4 class="stock_counts {{ stock.status }}">
+          <span *ngIf="stock.change != 'NA'">
+            <ion-icon name="arrow-dropup" *ngIf="stock.status == 'up'"></ion-icon>
+            <ion-icon name="arrow-dropdown" *ngIf="stock.status == 'down'"></ion-icon>
+          </span>
+          {{ stock.change }}
+          <span *ngIf="stock.change != 'NA'">({{ stock.percentage }})</span>
+        </h4>
+      </ion-col>
+      <ion-col *ngIf="!stock.close">
+        <div class="open animated-background"></div>
+        <div class="change animated-background"></div>
+      </ion-col>
+    </ion-row>
+  </button>
+</ion-list> -->

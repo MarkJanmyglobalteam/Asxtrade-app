@@ -1,0 +1,38 @@
+<!--
+  Generated template for the TermsAgreementPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header *ngIf="!isFromMenu">
+
+  <ion-navbar>
+    <ion-title>Policy</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-header class="main-header" *ngIf="isFromMenu">
+  <ion-toolbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon color="light" name='menu'></ion-icon>
+    </button>
+    <ion-title>Policy</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="bg-image">
+  <!-- <div class="scrollable-container"> -->
+  <terms-of-use-and-privacy-policy></terms-of-use-and-privacy-policy>
+  <!-- </div> -->
+
+  <div *ngIf="!isFromMenu">
+    <ion-item class="checkbox-container" margin-top no-lines>
+      <ion-label>I accept the terms of use and privacy policy</ion-label>
+      <ion-checkbox [(ngModel)]="accepted"></ion-checkbox>
+    </ion-item>
+
+    <button ion-button full round [disabled]="!accepted" (click)="gotoHome()">Continue</button>
+  </div>
+</ion-content>

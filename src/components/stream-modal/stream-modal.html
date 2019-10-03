@@ -1,0 +1,40 @@
+<!-- Generated template for the StreamModalComponent component -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="dismiss()">
+				<ion-icon name="md-close"></ion-icon>
+			</button>
+        </ion-buttons>
+        <ion-title>{{ title }}</ion-title>
+        <ion-buttons end>
+            <button color="light" ion-button (click)="submitPost(post)" [disabled]="posttype[type].submitDisabled()">
+				{{ posttype[type].submitTxt }}
+			</button>
+            <button  color="light" ion-button icon-only (click)="presentActionSheet()">
+				<ion-icon name="images"></ion-icon>
+			</button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-textarea placeholder="Share your idea about stocks" name="post" fz-elastic rows="10" [(ngModel)]="post" id="post"></ion-textarea>
+
+    <ion-card class="stream">
+        <div *ngIf="stream">
+            <ion-item>
+                <!-- <ion-avatar item-start>
+		      		<img src="{{ post.user.photoUrl }}" alt="{{ post.user.firstname + ' ' + post.user.lastname }}" class="userPhoto">
+		      	</ion-avatar> -->
+                <h2>{{ stream.user.firstname + ' ' + stream.user.lastname }}</h2>
+                <!-- <p>{{ stream.timeago }}</p> -->
+            </ion-item>
+
+            <ion-card-content>
+                <p [innerHTML]="stream.post"></p>
+            </ion-card-content>
+        </div>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,21 @@
+page-terms-agreement {
+  *{
+    color: #f4f4f4;
+  }
+  a{
+    color: #43b3f0;
+  }
+  .scrollable-container {
+    height: 72vh;
+    overflow: scroll;
+  }
+
+  .checkbox-container {
+    background-color: transparent !important;
+
+    ion-label {
+      text-overflow: unset !important;
+      white-space: unset !important;
+    }
+  }
+}

@@ -1,0 +1,153 @@
+<!-- Generated template for the PortfolioComponent component -->
+<div>
+  <ion-segment [(ngModel)]="selectedBoard" color="light">
+    <ion-segment-button *ngFor="let board of portfolioBoards" [value]="board" (click)="onBoardChanged(board)">
+      {{board}}
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<div class="preloader" *ngIf="stocks.preLoader">
+  <div text-center>
+    <img src="./assets/imgs/preloader.svg">
+    <p>LOADING..</p>
+  </div>
+</div>
+
+<div class="empty-list-message-container`" *ngIf="!stocks.preLoader && stocks.list.length === 0">
+  <h2>You don't have any items on your {{selectedBoard}} portfolio!</h2>
+  <p>Tap any ticker you want, and add to portfolio</p>
+</div>
+
+<div *ngIf="!stocks.preLoader && stocks.list.length > 0 && !showDetails">
+  <h5>
+    <ion-row>
+      <ion-col col-5>Invested:</ion-col>
+      <ion-col col-5>${{formatNumber(totalInvested)}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>Current Value:</ion-col>
+      <ion-col col-5>${{formatNumber(totalMarketValue)}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>Profit/(loss):</ion-col>
+      <ion-col col-5>
+        <span class="{{profitStatus}}">{{totalProfit}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>Change (%):</ion-col>
+      <ion-col col-5>
+        <span class="{{profitStatus}}">{{totalProfitPercent}}</span>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col col-5>Ranking:</ion-col>
+      <ion-col col-5>{{rankingText}}</ion-col>
+    </ion-row> -->
+    <br>
+  </h5>
+  <p class="ins">To make a trade click on the ticker.</p>
+  <table>
+    <tr>
+      <th >Ticker</th>
+      <th>Held</th>
+      <th>Price</th>
+      <th>Current Value</th>
+      <th>Profit</th>
+      <th>Profit %</th>
+    </tr>
+    <tr *ngFor="let stock of stocks.list" (click)="navigateToPortfolioViewPage(stock)">
+      <td>
+        <span class="align-left ticker">{{ stock.symbol }}</span>
+      </td>
+      <td>{{ formatNumber(stock.portfolioData?.totalShares || 0, 2) }}</td>
+      <td>{{ (stock.close && stock.close != 'NA') ? formatNumber(stock.close, 3) : '...' }}</td>
+      <td>{{ stock.portfolioData?.totalShares ? '$' + formatNumber(stock.portfolioData?.calculateMarketValue(stock.close), 2)
+        : '-' }}</td>
+      <td>
+        <span class="{{getPortfolioProfitStatus(stock)}}">
+          {{ stock.portfolioData?.totalShares ? '$' + formatNumber(stock.portfolioData?.calculateProfit(stock.close), 2) : '-' }}
+        </span>
+      </td>
+      <td>
+        <span class="{{getPortfolioProfitStatus(stock)}}">
+          {{ stock.portfolioData?.totalShares ? formatNumber(stock.portfolioData?.calculateProfitPercent(stock.close), 1) + '%' : '-'}}
+        </span>
+      </td>
+    </tr>
+
+    <!-- <tr *ngFor="let stock of portfolioStocks" (click)="navigateToPortfolioViewPage({ 
+          stock: stock,
+          held: stock.shares ? formatNumber( getTotalShares( stock.shares ) , 0) : 0,
+          price: (stock.shares && stock.shares != 'NA') ? formatNumber(stock.shares[0].closeValue, 3) : '...',
+          currentValue: stock.shares ? '$' + stockPortfolioModel.calculateMarketValue( getTotalShares( stock.shares ), stock.shares[0].closeValue )
+          : '-',
+          profit:  stock.shares ? '$' + formatNumber(stockPortfolioModel.calculateProfit(stock.shares[0].closeValue), 1) : '-',
+          profitPercent: stock.shares ? formatNumber(stockPortfolioModel.calculateProfitPercent(getTotalShares( stock.shares ), stock.shares[0].closeValue), 1) + '%' : '-'  
+        })">
+        <td>
+          <span class="align-left">{{ stock.stock }}</span>
+        </td>
+        <td>{{ stock.shares ? formatNumber( getTotalShares( stock.shares ) , 0) : 0 }}</td>
+        <td>{{ (stock.shares && stock.shares != 'NA') ? formatNumber(stock.shares[0].closeValue, 3) : '...' }}</td>
+        <td>{{ stock.shares ? '$' + stockPortfolioModel.calculateMarketValue( getTotalShares( stock.shares ), stock.shares[0].closeValue )
+          : '-' }}</td>
+        <td>
+          <span class="{{getPortfolioProfitStatus(stock)}}">
+            {{ stock.shares ? '$' + formatNumber(stockPortfolioModel.calculateProfit(stock.shares[0].closeValue), 1) : '-' }}
+          </span>
+        </td>
+        <td>
+          <span class="{{getPortfolioProfitStatus(stock)}}">
+            {{ stock.shares ? formatNumber(stockPortfolioModel.calculateProfitPercent(getTotalShares( stock.shares ), stock.shares[0].closeValue), 1) + '%' : '-'}}
+          </span>
+        </td>
+      </tr> -->
+  </table>
+</div>
+
+
+
+<!-- <ion-list *ngIf="!stocks.preLoader && stocks.list.length > 0">
+  <div class="total-shares-value">
+    <h2>Total Shares Value</h2>
+    <h3>{{ calculateTotalSharesValue() }}</h3>
+  </div>
+  <button ion-item *ngFor="let stock of stocks.list" (click)="showSharesPrompt(stock)">
+    <ion-row>
+      <ion-col col-8>
+        <h1>{{ stock.symbol }} </h1>
+        <h4>{{ stock.name }}</h4>
+      </ion-col>
+      <ion-col *ngIf="stock.close != null">
+        <h1>{{ stock.close }}</h1>
+        <h4 class="stock_counts {{ stock.status }}">
+          <span *ngIf="stock.change != 'NA'">
+            <ion-icon name="arrow-dropup" *ngIf="stock.status == 'up'"></ion-icon>
+            <ion-icon name="arrow-dropdown" *ngIf="stock.status == 'down'"></ion-icon>
+          </span>
+          {{ stock.change }}
+          <span *ngIf="stock.change != 'NA'">({{ stock.percentage }})</span>
+        </h4>
+      </ion-col>
+      <ion-col *ngIf="!stock.close">
+        <div class="open animated-background"></div>
+        <div class="change animated-background"></div>
+      </ion-col>
+    </ion-row>
+
+    <div class="shares-section">
+      <ion-row>
+        <ion-col class="shares" col-6>
+          <h2>Your Shares</h2>
+          <h2>{{ stock.portfolioData?.shares || 0 }}</h2>
+        </ion-col>
+        <ion-col class="market-value" col-6>
+          <h2>Market Value</h2>
+          <h2>{{ stock.portfolioData?.shares ? calculateShareStockMarketValue(stock) : '-' }}</h2>
+        </ion-col>
+      </ion-row>
+    </div>
+  </button>
+</ion-list> -->

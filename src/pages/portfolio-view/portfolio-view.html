@@ -1,0 +1,96 @@
+<!--
+  Generated template for the PortfolioViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="portfolio-view-header">
+  <ion-navbar color="main" class="portfolio-view-navbar">
+    <ion-title>{{ stock.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-image">
+  <div class="section-lockup">
+    <div class="stock-lockup {{ overallProfitStatus }}">
+      <ion-row>
+        <ion-col col-12>
+          <h4>TICKER: {{ stock.symbol }}</h4>
+          <button  ion-button block class="company-button" (click)="navigateToStockPage()">Company Info</button>
+          <div class="stock-shares-display">
+            <ion-row>
+              <ion-col col-4>Invested:</ion-col>
+              <ion-col col-8>${{formatNumber(stock.portfolioData?.calcuteAcqPrice())}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Shares:</ion-col>
+              <ion-col col-8>{{formatNumber(stock.portfolioData?.totalShares) || 0}}</ion-col>
+            </ion-row>
+            <!-- <ion-row>
+              <ion-col col-4>Trade:</ion-col>
+              <ion-col col-8>{{stock.portfolioData?.totalShares || 0 > 0  ? 'Sell' : 'Buy'}}</ion-col>
+            </ion-row> -->
+            <ion-row>
+              <ion-col col-4>Price:</ion-col>
+              <ion-col col-8>${{stock.close}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Value:</ion-col>
+              <ion-col col-8>${{formatNumber(stock.portfolioData?.calculateMarketValue(stock.close))}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>Profit:</ion-col>
+              <ion-col col-8>
+                <span class="stock_counts {{ overallProfitStatus }}">
+                  ${{formatNumber(stock.portfolioData?.calculateProfit(stock.close))}} ({{formatNumber(stock.portfolioData?.calculateProfitPercent(stock.close))}}%)
+                </span>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div>
+    <div class="table-container" >
+      <table *ngIf="stock.portfolioData.shares">
+        <thead>
+          <tr>
+            <th>Transaction</th>
+            <th>Held</th>
+            <th>Acq. Price</th>
+            <th>Value</th>
+            <th>Profit</th>
+            <th>Profit %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let share of stock.portfolioData.shares; let i = index">
+            <td>
+              <button ion-button class="sell-button" (click)="presentBuySellShareModal(true, i)">Sell</button>
+            </td>
+            <td>{{formatNumber(share.shareCount,2)}}</td>
+            <td>{{formatNumber(share.closeValue, 3)}}</td>
+            <td>${{formatNumber(share.calculateMarketValue(stock.close), 2)}}</td>
+            <td>
+              <span class="{{getProfitStatus(share)}}">
+                ${{formatNumber(share.calculateProfit(stock.close), 2)}}
+              </span>
+            </td>
+            <td>
+              <span class="{{getProfitStatus(share)}}">
+                <!-- {{formatNumber(share.calculateProfitPercent(stock.close), 1)}}% -->
+                {{formatNumber(stock.portfolioData?.calculateProfitPercent(stock.close), 1)}}%
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ion-fab right top>
+    <button  class="button-color" ion-button (click)="presentBuySellShareModal(false)">BUY</button>
+  </ion-fab>
+</ion-content>

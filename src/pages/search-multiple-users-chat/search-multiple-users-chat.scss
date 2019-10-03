@@ -1,0 +1,17 @@
+page-search-multiple-users-chat {
+  .column-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-info {
+    .item-inner {
+      border-bottom: none !important;
+    }
+  }
+
+  .group-name-input, .user-container {
+    padding: 0 !important;
+  }
+}

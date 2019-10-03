@@ -1,0 +1,60 @@
+<!--
+  Generated template for the ConversationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header [ngClass]="{ 'individual-chat': !isGroupChat }">
+  <ion-navbar color="main">
+    <ion-title>{{ conversationName }}</ion-title>
+    <ion-buttons end *ngIf="isGroupChat && isGroupChatInitialized">
+      <button (click)="goToChatOptions()" ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ng-template [ngIf]="!isGroupChat">
+    <div class="status">
+      <small class="status" [ngClass]="{ 'online' : participants[0]?.active }"></small>
+      <span>{{ participants[0]?.active ? 'ONLINE' : 'OFFLINE' }}</span>
+    </div>
+    <img class="user-photo" [src]="participants[0]?.photoUrl || './assets/dp-placeholder.png'">
+  </ng-template>
+</ion-header>
+
+<ion-content padding #chatcontainer>
+  <div class="chat-container">
+    <div
+      *ngFor="let message of messages; let idx = index;"
+      class="chat-bubble"
+      [ngClass]="{ 'chat-bubble-me': message.userId == currentLoggedInUserId, 'chat-bubble-other': message.userId != currentLoggedInUserId, 'succeeding': message.userId == messages[idx - 1]?.userId }">
+      <small class="user-name" *ngIf="message.userId != messages[idx - 1]?.userId">{{ message.user?.firstname }}</small>
+      <img class="userPhotoUrl" [src]="message.user?.photoUrl || './assets/dp-placeholder.png'" *ngIf="(message.userId != currentLoggedInUserId) && (message.userId != messages[idx - 1]?.userId)">
+      <span *ngIf="message.payload">{{ message.payload }}</span>
+
+      <div (click)="openUrl(message.file.downloadUrl)" class="file-preview-container" *ngIf="message.file?.contentType.startsWith('image')">
+        <img [src]="message.file.downloadUrl" [alt]="message.file.fileName">
+      </div>
+      <div (click)="openUrl(message.file.downloadUrl)" class="file-preview-container download-thumbnail-container" *ngIf="message.file && !message.file?.contentType.startsWith('image')">
+        <span>{{ message.file.fileName }}</span>
+        <ion-icon name="cloud-download"></ion-icon>
+      </div>
+
+      <small>{{ message.fromNow }}</small>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer color="main">
+  <ion-toolbar color="main" position="bottom">
+    <ion-buttons [ngClass]="{'hide-upload-files-options': message.length > 0 }" left>
+      <button ion-button icon-only (click)="uploadImageFromCamera()"><ion-icon color="light" name="md-camera"></ion-icon></button>
+      <button ion-button icon-only (click)="uploadImageFromGallery()"><ion-icon color="light" name="md-image"></ion-icon></button>
+      <button ion-button icon-only (click)="uploadFileFromExplorer()"><ion-icon color="light" name="md-folder"></ion-icon></button>
+    </ion-buttons>
+    <ion-textarea autocomplete="on" type="text" autocorrect="on" placeholder="Say something..." name="message" fz-elastic rows="1" [(ngModel)]="message"></ion-textarea>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="sendMessage(message)"><ion-icon name="send"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

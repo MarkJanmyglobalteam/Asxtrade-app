@@ -1,0 +1,242 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@import "../../node_modules/ionic2-auto-complete/auto-complete";
+.p-8 {
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.content-md,
+.content-ios,
+.content-wp {
+    background-color: #211f20;
+}
+
+.header {
+    .toolbar-background-md,
+    .toolbar-background-ios,
+    .toolbar-background-wp {
+        background-color: #3B4652;
+        border-bottom: #f4f4f4 solid 2px;
+    }
+    .toolbar-title-ios,
+    .toolbar-title-md,
+    .toolbar-title-wp {
+        color: #f4f4f4 !important;
+        text-align: center;
+    }
+    .button {
+        background-color: transparent;
+    }
+}
+
+ion-navbar {
+    text-align: center;
+    min-height: 60px !important;
+    ion-title .toolbar-title {
+        font-weight: 100;
+        font-size: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        &:after {
+            content: "";
+            background-color: #f4f4f4;
+            position: absolute;
+            bottom: -12px;
+            padding: 0 12px;
+            height: 3px;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            width: 4px;
+        }
+    }
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    // background: linear-gradient(to right, #9a9a9a 8%, #777777 18%, #a2a2a2 33%);
+    // background: linear-gradient(to right, #777676 8%, #676767 18%, #7b7b7b 33%);
+    background: linear-gradient(to right, #2d2d2d 8%, #3e3d3d 18%, #2d2d2d 33%);
+    background-size: 800px 104px;
+    position: relative;
+    border-radius: 2px;
+    &.open {
+        height: 25px;
+        margin-bottom: 10px;
+    }
+    &.change {
+        height: 15px;
+    }
+}
+
+.action-sheet-group {
+    background-color: #3B3939 !important;
+    button,
+    .action-sheet-title {
+        color: #bebcbd !important;
+    }
+}
+
+.stream {
+    h2 {
+        // color: #fff;
+    }
+    .card-content {
+        padding-bottom: 5px;
+        p {
+            // color: #fff;
+        }
+    }
+    ion-card-content .animated-background {
+        margin-bottom: 5px;
+    }
+    .animated-background {
+        height: 17px;
+        .user {
+            width: 50%;
+            height: 63px;
+        }
+    }
+    button {
+        color: #bebcbd;
+        padding: 5px;
+        &.active {
+            color: #43b3f0;
+        }
+    }
+    .info ion-col {
+        padding: 0 5px;
+    }
+    .repost {
+        margin: 10px 0 0 0;
+        ion-card {
+            border-left: 5px #bcbabb solid;
+            box-shadow: none;
+            width: 100%;
+            margin-left: 13px!important;
+            .label-md {
+                margin: 0;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            p {
+                margin: 0 0 2px;
+                overflow: inherit;
+                font-size: 1.1rem;
+                line-height: normal;
+                text-overflow: inherit;
+                color: #666;
+            }
+            ion-card-content p {
+                color: #fff;
+            }
+            ion-item,
+            ion-card-content {
+                padding-left: 10px;
+            }
+        }
+    }
+}
+
+.empty-list-message-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #bebcbd;
+    height: 100%;
+}
+
+page-tabs {
+    .tabs {
+        .tab-button[aria-selected=true] {
+            background-color: #f4f4f4;
+            .tab-button-icon {
+                color: #164A70 !important;
+            }
+        }
+        .tab-button {
+            .tab-button-icon {
+                color: #f4f4f4 !important;
+            }
+        }
+    }
+}
+
+.bg-image{
+    background-image: url(../assets/imgs/bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-image2{
+    background-color: #3B4652;
+    
+}
+table {
+        color: #f4f4f4;
+}
+
+.item.item-divider{
+    color: #000;
+    background-color: #f4f4f4;
+}
+
+.menu, .header  {
+    button {
+        background: unset;
+        color: #f4f4f4;
+    }
+}
+
+.segment-activated{
+    .icon-ios-light {
+        color: #000;
+    }
+}
+
+.up {
+    color: #32db64 !important;
+}
+ion-content.has-refresher > .scroll-content {
+  background-color: unset !important;
+}
+.refresher-refreshing .spinner-crescent circle {
+    stroke: #f4f4f4 !important;
+}
+.ticker{
+    color: #74A8FF;
+}
+// .down {
+//     color: #941C2F !important;
+// }

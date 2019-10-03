@@ -1,0 +1,45 @@
+<!--
+  Generated template for the ChatPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar color="main">
+		<ion-title>Conversations</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+  <!-- <pre>{{ userConversations | json }}</pre> -->
+
+  <ion-list>
+    <ion-item [ngClass]="{ 'has-unread' : userConversation?.unread }" *ngFor="let userConversation of userConversations" (click)="goToConversationPage(userConversation)">
+    
+      <ion-avatar item-start *ngIf="userConversation?.members.length === 1">
+        <img [src]="userConversation?.members[0]?.photoUrl || './assets/dp-placeholder.png'" alt="user image">
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="userConversation?.members.length > 1">
+        <img [src]="'./assets/groupchat-placeholder.png'" alt="user image" style="background: white;">
+      </ion-avatar>
+
+      <h2>{{ userConversation?.conversationName }}</h2>
+      <!-- <h2>{{ userConversation?.members[0]?.firstname }} {{ userConversation?.members[0]?.lastname }}</h2> -->
+      <p>{{ (userConversation?.latestMessage?.payload) ? userConversation?.latestMessage?.payload : 'image' }}</p>
+      <!-- <ion-note item-end>{{ userConversation?.latestMessage?.time }}</ion-note> -->
+    </ion-item>
+  </ion-list>
+
+  <ion-fab bottom right >
+    <button color="light" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button (click)="goToIndividualUsersSearchPage()" ion-fab>
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button (click)="goToMultipleUsersSearchPage()" ion-fab>
+        <ion-icon name="people"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

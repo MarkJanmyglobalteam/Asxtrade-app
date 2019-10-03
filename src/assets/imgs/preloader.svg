@@ -1,0 +1,42 @@
+<svg width="70" height="70" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" fill="#FFF">
+    <g transform="matrix(1 0 0 -1 0 80)">
+        <rect width="8" height="20" rx="3">
+            <animate attributeName="height"
+                 begin="0s" dur="4.3s"
+                 values="10;22;28;40;32;16;33;22;32;12;33;6;32;28;17;1;11;38;10" calcMode="linear"
+                 repeatCount="indefinite" />
+			<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="1s" repeatCount="indefinite" />
+        </rect>
+        <rect x="15" width="8" height="80" rx="3">
+            <animate attributeName="height"
+                 begin="0s" dur="2s"
+                 values="40;27;16;2;38;11;36;16;6;7;30;40" calcMode="linear"
+                 repeatCount="indefinite" />
+				<animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.2s" dur="1s" repeatCount="indefinite" />
+        </rect>
+        <rect x="30" width="8" height="50" rx="3">
+            <animate attributeName="height"
+                 begin="0s" dur="1.4s"
+                 values="25;17;39;11;28;11;17;38;40;27;10;25" calcMode="linear"
+                 repeatCount="indefinite" />
+				 <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.4s" dur="1s" repeatCount="indefinite" />
+
+        </rect>
+        <rect x="45" width="8" height="30" rx="3">
+            <animate attributeName="height"
+                 begin="0s" dur="2s"
+                 values="30;45;13;40;56;35;45;38;34;23;57;30" calcMode="linear"
+                 repeatCount="indefinite" />
+				 <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.6s" dur="1s" repeatCount="indefinite" />
+
+        </rect>
+		<rect x="60" width="8" height="30" rx="3">
+            <animate attributeName="height"
+                 begin="0s" dur="2s"
+                 values="10;22;28;40;32;16;33;22;32;12;33;10" calcMode="linear"
+                 repeatCount="indefinite" />
+				 <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.8s" dur="1s" repeatCount="indefinite" />
+
+        </rect>
+    </g>
+</svg>

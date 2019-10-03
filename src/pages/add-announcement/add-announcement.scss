@@ -1,0 +1,13 @@
+page-add-announcement {
+  ion-textarea {
+    textarea {
+      min-height: 300px;
+    }
+  }
+  
+  [contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+  }
+  
+}

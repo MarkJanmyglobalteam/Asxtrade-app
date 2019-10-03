@@ -1,0 +1,28 @@
+<!-- Generated template for the TrendingComponent component -->
+<div class="preloader" *ngIf="stocks.preLoader">
+	<div text-center>
+		<img src="./assets/imgs/preloader.svg">
+		<p>LOADING..</p>
+	</div>
+</div>
+
+<div *ngIf="!stocks.preLoader">
+	<table>
+		<tr>
+			<th>Ticker</th>
+			<th>Price</th>
+			<th>Move. %</th>
+			<th>Volume</th>
+			<th>Ann</th>
+		</tr>
+		<tr *ngFor="let stock of stocks.list" (click)="navigateToStockPage(stock)">
+			<td class="ticker">{{ stock.symbol }}</td>
+			<td>{{ (stock.close && stock.close != 'NA') ? stock.close.toFixed(3): '...' }}</td>
+			<td class="percentage-movement {{ stock.status }}">
+				{{ stock.percentage ? stock.percentage: '...' }}
+			</td>
+			<td class="volume-value">{{ stock.volume ? formatVolume(stock.volume) : '...' }}</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</div>

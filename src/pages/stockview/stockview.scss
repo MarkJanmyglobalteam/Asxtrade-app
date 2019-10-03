@@ -1,0 +1,167 @@
+page-stockview {
+  ion-avatar {
+    align-self: flex-start;
+    margin-top: 12px !important;
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .post-container {
+    img {
+      margin-top: 10px;
+    }
+  }
+
+  .comment-container {
+    ion-item {
+      border-bottom: unset !important;
+    }
+
+    .comments-label {
+      padding: 8px 16px !important;
+      // color: white !important;
+    }
+
+    .add-comment-container {
+      padding: 0 16px 16px;
+      // color: white !important;
+    }
+  }
+
+	.stockview-header {
+		.stockview-navbar {
+			.toolbar-background-md,
+			.toolbar-background-ios,
+			.toolbar-background-wp {
+				border-bottom: #f4f4f4 solid 2px;
+			}
+		}
+  }
+
+  .stock-action-button {
+		width: auto;
+    font-size: 1.2rem;
+    padding: 5%;
+  }
+
+  // CSS Kung-fu as it's not currently offered by Ionic as of date
+  ion-toolbar.segment-toolbar {
+    ion-segment {
+      text-align: center;
+      display: block;
+      overflow-x: scroll;
+      white-space: nowrap;
+      background-color: #3B4652 !important;
+
+      ion-segment-button.segment-button {
+        display: inline-block;
+        width: auto;
+      }
+    }
+  }
+
+	ion-navbar {
+		text-align: left !important;
+		min-height: 72px !important;
+		text-overflow: inherit !important;
+		white-space: normal !important;
+		ion-title {
+			text-align: center;
+			margin-left: 10px;
+		}
+	}
+
+	.toolbar-title,
+	.toolbar-title-md {
+		&:after {
+			margin:auto;
+			text-align: center !important;
+		}
+	}
+
+	.back-button {
+		position: absolute;
+		z-index: 99999;
+	}
+
+	h1, h4 {
+		margin: 0 !important;
+		color: #f4f4f4;
+	}
+
+	.name {
+		margin: 0px;
+		font-weight: 400;
+		font-size: 18px;
+	}
+
+	.section-lockup {
+		// border-bottom: #43b3f0 solid 2px;
+		// padding-bottom: 20px;
+		margin: 10px!important;
+	}
+
+	.stock-lockup {
+		padding: 0 10px;
+
+		&.up {
+			border-left: 5px #32db64 solid;
+
+			.stock_counts {
+				color: #32db64!important;
+			}
+		}
+
+		&.down {
+			border-left: 5px red solid;
+
+			.stock_counts {
+				color: red!important;
+			}
+		}
+	}
+
+	.toolbar-title {
+		text-overflow: inherit !important;
+		white-space: normal !important;
+	}
+
+	.segment-icon {
+		font-size: 15px !important;
+	}
+
+	ion-segment-button {
+	  border-bottom-width: 4px !important;
+	}
+
+	.inactive-link {
+	  cursor: pointer;
+	  user-select: none;
+	}
+
+	.comment-name {
+		color: #43b3f0;
+	}
+
+	.comment-message {
+    // color: #FFF !important;
+    white-space: normal;
+  }
+
+  .announcement-container {
+    .announcement-header {
+      font-size: 18px;
+    }
+
+    .announcement-headline {
+      white-space: normal;
+    }
+
+    .announcement-chevron-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+}

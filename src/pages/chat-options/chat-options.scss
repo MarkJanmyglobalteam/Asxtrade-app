@@ -1,0 +1,18 @@
+page-chat-options {
+  *{
+    color: #f4f4f4;
+  }
+  ion-list-header {
+    color: white !important;
+  }
+
+  ion-list {
+    .item-md {
+      background-color: transparent !important;
+    }
+  }
+
+  .members-list {
+    margin-top: 40px;
+  }
+}

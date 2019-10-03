@@ -1,0 +1,27 @@
+page-create-account {
+
+  .register-button {
+    margin-top: 40px;
+    color: #343434;
+    background: #CDCDCD;
+    border-color: #CDCDCD;
+    width: 60%;
+  }
+
+  .form-container {
+    padding: 0 32px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .input-container {
+    background-color: transparent;
+  }
+  input{
+    color: #f4f4f4
+  }
+}

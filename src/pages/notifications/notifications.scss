@@ -1,0 +1,44 @@
+page-notifications {
+  .notification-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.unread {
+      font-weight: bold;
+    }
+
+    .notification-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      // p {
+      //   color: white !important;
+      // }
+
+      .header {
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      .content {
+        font-size: 1em;
+      }
+
+      .timestamp {
+        font-size: 0.8em;
+        // margin-bottom: 15px;
+      }
+    }
+
+
+  }
+}

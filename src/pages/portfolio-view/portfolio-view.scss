@@ -1,0 +1,122 @@
+page-portfolio-view {
+    h4,.sell-button {
+        color: #f4f4f4
+    }
+    .portfolio-view-header {
+        .portfolio-view-navbar {
+            .toolbar-background-md,
+            .toolbar-background-ios,
+            .toolbar-background-wp {
+                border-bottom: #f4f4f4 solid 2px;
+            }
+        }
+    }
+    ion-navbar {
+        text-align: left !important;
+        min-height: 72px !important;
+        text-overflow: inherit !important;
+        white-space: normal !important;
+        ion-title {
+            text-align: center;
+            margin-left: 10px;
+        }
+    }
+    .back-button {
+        position: absolute;
+        z-index: 99999;
+    }
+    .section-lockup {
+        // border-bottom: #43b3f0 solid 2px;
+        // padding-bottom: 20px;
+        // margin: 10px !important;
+        font-weight: bold;
+    }
+    // .stock-lockup {
+    //     padding: 0 10px;
+    //     font-weight: bold;
+    //     &.up {
+    //         border-left: 5px green solid;
+    //         .stock_counts {
+    //             color: green !important;
+    //         }
+    //     }
+    //     &.down {
+    //         border-left: 5px red solid;
+    //         .stock_counts {
+    //             color: red !important;
+    //         }
+    //     }
+    // }
+    .stock-shares-display {
+        border-radius: 4px;
+        min-height: 2.8em;
+        font-size: 1.6rem;
+        color: #000;
+        background-color: #f4f4f4;
+        margin: 0.4rem 0.2rem;
+        padding: 1em;
+        align-items: center;
+        // ion-row {
+        //     text-align: right;
+        // }
+    }
+    .table-container {
+        width: 100%;
+        overflow: auto;
+    }
+    table {
+        // overflow: scroll;
+        // position: absolute;
+        // left: 0;
+        table-layout: fixed;
+        th,
+        td {
+            border: 1px solid #f4f4f4;
+            padding: 4px 8px !important;
+            width: 1px;
+            white-space: nowrap;
+            &.percentage-movement {
+                .up,
+                .down {
+                    font-weight: 500;
+                    margin-right: 4px;
+                }
+                .up {
+                    color: green;
+                }
+                .down {
+                    color: red;
+                }
+            }
+        }
+        td {
+            text-align: right;
+            .align-center {
+                text-align: center;
+                width: 100%;
+                display: block;
+            }
+            .up {
+                color: green;
+            }
+            .down {
+                color: red;
+            }
+        }
+    }
+    .button-color {
+        background-color: #32db64 !important;
+        border-radius: 5px;
+    }
+    .company-button,
+    .stock-shares-display {
+        // width: 100%;
+    }
+    .company-button {
+        background-color: #74A8FF;
+        color: #f4f4f4;
+    }
+    .sell-button{
+        background-color: red !important;
+    }
+}

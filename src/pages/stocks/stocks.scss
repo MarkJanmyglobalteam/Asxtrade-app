@@ -1,0 +1,176 @@
+page-stocks {
+    ion-header,
+    ion-navbar {
+        // background: #343434 !important;
+    }
+    ion-toolbar {
+        ion-segment {
+            background-color: #3B4652 !important;
+            @media (min-width: 424px) {
+                .segment-title {
+                    display:block;
+                    word-break: break-word;
+                }
+            }
+        }
+    }
+    // .bar-button-default-md,
+    // .bar-button-clear-md-default,
+    // .bar-button-md-default {
+    //     color: #43b3f0 !important;
+    // }
+    .bar-buttons {
+        //position: absolute;
+    }
+    .toolbar {
+        z-index: 9999 !important;
+    }
+    .content .toolbar-background-md,
+    .content .toolbar-background-ios,
+    .content .toolbar-background-wp {
+        background-color: #3B3939;
+    }
+    .content .toolbar {
+        padding: 0;
+        min-height: 40px;
+        margin-bottom: 15px;
+    }
+    .segment-md-secondary .segment-button {
+        color: #bcbabb !important;
+        &.activated,
+        &.segment-activated {
+            color: #43b3f0 !important;
+            border-color: #43b3f0 !important;
+            border-bottom-width: 4px;
+            &:nth-child(2) {
+                min-width: 80px;
+            }
+            &:nth-child(3) {
+                min-width: 70px;
+            }
+            &:nth-child(4) {
+                min-width: 60px;
+            }
+            &:nth-child(5) {
+                min-width: 90px;
+            }
+        }
+    }
+    .switch-section {
+        padding: 0 15px;
+    }
+    ion-list {
+        padding: 0;
+        button {
+            padding: 0 !important;
+            background-color: transparent !important;
+            >.item-inner {
+                border-bottom: 2px solid #43b3f0 !important;
+                padding: 25px 10px !important;
+                margin: 0 !important;
+            }
+            &:last-child>.item-inner {
+                border-bottom: none !important;
+            }
+            ion-label {
+                margin: 0 !important;
+            }
+        }
+        .col {
+            padding: 0;
+            word-wrap: break-word;
+            white-space: normal;
+            &:first-child {
+                padding-right: 10px;
+            }
+            h1 {
+                margin: 0;
+                font-weight: 400;
+                color: #bebcbd;
+            }
+            h4 {
+                margin: 0px;
+                font-weight: 400;
+                color: #bebcbd;
+                font-size: 14px;
+            }
+            .stock_counts {
+                font-weight: 500;
+                font-size: 95%;
+            }
+            .up {
+                color: green;
+            }
+            .down {
+                color: red;
+            }
+        }
+    } // .spinner {
+    // 	// width: 40px!important;
+    // 	margin: auto;
+    // 	display: block;
+    // }
+    .preloader {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        height: 60vh;
+        >div {
+            margin: auto;
+        }
+    }
+    .userPhoto {
+        border-radius: 100%;
+    }
+    .user-inf-col {
+        padding-left: 15px !important;
+        display: flex;
+        align-items: center;
+    }
+    .name {
+        font-size: 14px;
+    }
+    .email {
+        font-size: 12px;
+        word-break: break-word;
+        text-overflow: ellipsis;
+    }
+    ul {
+        width: 91%;
+        height: 60vh;
+        overflow: scroll;
+        background: transparent;
+    }
+    ul>li {
+        background-color: #3B3939;
+    }
+    ul>li:hover {
+        background-color: #FFF;
+        color: #3B3939;
+    }
+    ion-auto-complete {
+        width: 100%;
+    }
+    #transparentPage {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        z-index: 9;
+    }
+    .titleicon {
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        text-align: center;
+    }
+
+    ion-auto-complete{
+        ul{
+            // background-color: #3B4652 !important;
+            li{
+                color: #f4f4f4;
+            }
+        }
+       
+    }
+}

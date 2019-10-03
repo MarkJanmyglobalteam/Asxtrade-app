@@ -1,0 +1,17 @@
+page-add-more-group-chat-members {
+  .column-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-info {
+    .item-inner {
+      border-bottom: none !important;
+    }
+  }
+
+  .user-container {
+    padding: 0 !important;
+  }
+}

@@ -1,0 +1,88 @@
+portfolio {
+   
+    color: #f4f4f4;
+    .ins{
+        font-size: 1.4rem;
+    }
+    table,
+    th,
+    td {
+        border-collapse: collapse;
+    }
+    ion-col {
+        .up {
+            color: green;
+        }
+        .down {
+            color: red;
+        }
+    }
+    table {
+        width: 100%;
+        overflow: scroll;
+        position: absolute;
+        left: 0;
+        th,
+        td {
+            border: 1px solid #f4f4f4;
+            padding: 4px 8px !important;
+            width: 16.666%;
+            &.percentage-movement {
+                .up,
+                .down {
+                    font-weight: 500;
+                    margin-right: 4px;
+                }
+                .up {
+                    color: green;
+                }
+                .down {
+                    color: red;
+                }
+            }
+        }
+        td {
+            text-align: right;
+            .align-left {
+                text-align: left;
+                width: 100%;
+                display: block;
+            }
+            .up {
+                color: green;
+            }
+            .down {
+                color: red;
+            }
+        }
+    }
+    .total-shares-value {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px 0;
+        h2,
+        h3 {
+            margin: 0;
+            font-weight: 400;
+            color: #bebcbd;
+        }
+    }
+    .shares-section {
+        margin-top: 20px;
+        .shares,
+        .market-value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            h2,
+            h3 {
+                margin: 0;
+                font-weight: 400;
+                color: #bebcbd;
+            }
+        }
+    }
+}

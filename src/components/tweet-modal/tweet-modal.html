@@ -1,0 +1,21 @@
+<!-- Generated template for the StreamModalComponent component -->
+<ion-header>
+	<ion-toolbar>
+    	<ion-buttons start>
+      		<button ion-button icon-only (click)="closeModal()">
+        		<ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      		</button>
+    	</ion-buttons>
+    	<ion-title>Add Tweet</ion-title>
+    	<ion-buttons end>
+      		<button ion-button (click)="postTweet()">
+      			Tweet
+      		</button>
+    	</ion-buttons>
+  	</ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-textarea placeholder="Share your idea about stocks" name="message" fz-elastic rows="1" [(ngModel)]="message" id="message"></ion-textarea>
+</ion-content>

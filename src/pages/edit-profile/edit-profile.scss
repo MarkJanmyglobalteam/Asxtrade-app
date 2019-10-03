@@ -1,0 +1,81 @@
+page-edit-profile {
+
+    ion-header {
+        ion-navbar {
+            flex-direction: column !important;
+
+            button {
+                align-self: baseline;
+                margin-top: 5px !important;
+            }
+
+            div.toolbar-content {
+                align-self: left;
+                margin-top: 12px;
+                margin-left: 5px;
+                margin-bottom: 28px;
+
+                ion-title {
+                    .toolbar-title:after {
+                        margin:auto;
+                    }
+                }
+            }
+        }
+
+        &::after {
+            display: none !important;
+        }
+    }
+
+    ion-content {
+        background: #3B3939 !important;
+
+        ion-row {
+            padding: 0 12px 6px 12px;
+
+            &.user-photo {
+                margin-bottom: 12px;
+
+                div {
+                    position: relative;
+                    height: 150px;
+                    width: 150px;
+
+                    img {
+                        position: relative;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    button {
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        width: 50px;
+                    }
+                }
+
+            }
+
+            ion-input, ion-textarea, ion-datetime {
+                background: #f4f4f4;
+                color: #535353;
+
+                padding-left: 11px !important;
+
+                &.divider {
+                    margin-right: 6px;
+                }
+            }
+
+            ion-datetime {
+              width: 100% !important;
+            }
+
+        }
+    }
+
+}

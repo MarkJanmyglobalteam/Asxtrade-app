@@ -1,0 +1,126 @@
+<!--
+    Generated template for the MyAccountPage page.
+
+    See http://ionicframework.com/docs/components/#navigation for more info on
+    Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="main" style="position: absolute; z-index: 11">
+        <ion-buttons end>
+            <button ion-button icon-only (click)="openUserSettings()" style="padding-right: 10px;">
+                <ion-icon ios="md-more" md="md-more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar color="main" style="padding-top: 63px!important;">
+        <img [src]="user?.photoUrl">
+        <h3>{{ user?.firstname === null ? '' : user?.firstname + ' ' + user?.lastname }}</h3>
+        <div class="address">
+            <ion-icon color="light" name="pin"></ion-icon>
+            <small color="dark" >{{ user?.address }}</small>
+        </div>
+        <div *ngIf="!anotherUserId" class="action-buttons">
+            <!-- <button class="btn-edit" ion-button [clear]="true">Edit</button> -->
+            <!-- <button class="btn-logout" ion-button [clear]="true" (click)="signOut()"><ion-icon name="power"></ion-icon></button> -->
+        </div>
+    </ion-toolbar>
+    <div col-12 col-lg-5 style="margin: auto" [hidden]="anotherUserId && anotherUserId == currentUserId">
+        <div class="profile-buttons">
+            <button *ngIf="!anotherUserId" ion-button full icon-start [clear]="true" (click)="editProfile()">
+                <!-- <ion-icon name="pencil"></ion-icon> -->
+                <span>Edit profile</span>
+            </button>
+            <button *ngIf="!anotherUserId" ion-button full icon-end [clear]="true" (click)="changePassword()">
+                <!-- <ion-icon style="margin-right: 10px;" name="lock"></ion-icon> -->
+                <span>Change pass</span>
+            </button>
+            <button *ngIf="anotherUserId && anotherUserId != currentUserId" ion-button full icon-end [clear]="true" (click)="toggleFollow()">
+                <!-- <ion-icon style="margin-right: 10px;" name="lock"></ion-icon> -->
+                <span>{{ isAnotherUserFollowed? 'Unfollow':'Follow' }}</span>
+            </button>
+        </div>
+    </div>
+</ion-header>
+
+
+<ion-content no-bounce>
+    <ion-grid>
+        <ion-row center>
+            <ion-col col-12 col-lg-5 style="margin: auto">
+                <ion-list>
+                    <div class="item flex" ion-item>
+                        <div class="item-count-block">
+                            <h3>{{ !user?.followData$ ? '0' : user.followers }}</h3>
+                            <small>FOLLOWERS</small>
+                        </div>
+                        <div class="item-count-block">
+                            <h3>{{ !user?.followData$ ? '0' : user.following }}</h3>
+                            <small>FOLLOWING</small>
+                        </div>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>User Name</label>
+                        <span>{{ user?.username }}</span>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>Email Address</label>
+                        <span>{{ user?.email }}</span>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>Mobile Number</label>
+                        <span>{{ user?.mobileNumber }}</span>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>First Name</label>
+                        <span>{{ user?.firstname }}</span>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>Last Name</label>
+                        <span>{{ user?.lastname }}</span>
+                    </div>
+                    <!-- <div class="item" ion-item>
+                        <label>Address</label>
+                        <span>{{ user?.address }}</span>
+                    </div> -->
+                    <div class="item" ion-item>
+                        <label>Birth Date</label>
+                        <span>{{ formatDate(user?.birthdate) }}</span>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>Post Code</label>
+                        <span>{{ user?.postCode }}</span>
+                    </div>
+
+                    <div class="item" ion-item>
+                        <label>Profile Risk Rating</label>
+                        <span>{{ stockInfo?.profileRisk }}</span>
+                    </div>
+                    <div class="item" ion-item>
+                        <label>Qualified S 708 Investor</label>
+                        <span>{{ stockInfo?.qualified708Investor }}</span>
+                    </div>
+                    <div class="item" ion-item *ngIf="stockInfo?.sharePortfolio">
+                        <label>Share Portfolio types</label>
+                        <div class="list">
+                            <span *ngFor="let share of stockInfo?.sharePortfolio">{{ share }}</span>
+                        </div>
+                    </div>
+                    <div class="item" ion-item *ngIf="stockInfo?.tradingBasis">
+                        <label>Trading Basis</label>
+                        <div class="list">
+                            <span *ngFor="let trade of stockInfo?.tradingBasis">{{ trade }}</span>
+                        </div>
+                    </div>
+
+                    <div class="item" ion-item *ngIf="stockInfo?.investmentSectors">
+                        <label>Trading Basis</label>
+                        <div class="list">
+                            <span *ngFor="let sector of stockInfo?.investmentSectors">{{ sector }}</span>
+                        </div>
+                    </div>
+
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

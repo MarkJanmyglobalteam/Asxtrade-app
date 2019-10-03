@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Group details</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-image">
+    <ion-list>
+        <ion-item *ngIf="isAdmin" (click)="goToAddAnnouncement()">
+            <ion-icon ios="ios-megaphone" md="ios-megaphone" item-start></ion-icon>
+            Make an Announcement
+        </ion-item>
+        <ion-item (click)="signout()">
+            <ion-icon name="power" item-start></ion-icon>
+            Logout
+        </ion-item>
+    </ion-list>
+</ion-content>

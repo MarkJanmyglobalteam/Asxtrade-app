@@ -1,0 +1,8 @@
+{
+  "name": "asxtrade",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "id": "04c0e6ff"
+}

@@ -1,0 +1,60 @@
+<!--
+  Generated template for the QuestionnaireStockQuestionsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Survey</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="bg-image">
+  <ion-list radio-group [(ngModel)]="form.profileRisk">
+    <ion-label color="light" >How do you rate your risk profile?<br/>(5 as highest, 1 as lowest)</ion-label>
+    <ion-item no-padding *ngFor="let option of riskProfileOptions">
+      <ion-label color="light" >{{ option }}</ion-label>
+      <ion-radio color="light"  [value]="option"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-label  color="light" >What type of share portfolio do you trade in?</ion-label>
+    <ion-item no-padding *ngFor="let option of sharePortfolioOptions">
+      <ion-label color="light" >{{ option }}</ion-label>
+      <ion-checkbox  color="light" (ionChange)="updateSharePortfolio($event.value, option)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-label  color="light" >What do you base your trading off?</ion-label>
+    <ion-item no-padding *ngFor="let option of tradingBasisOptions">
+      <ion-label  color="light" >{{ option }}</ion-label>
+      <ion-checkbox  color="light"  (ionChange)="updateTradingBasis($event.value, option)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-label color="light" >Sectors you invest in:</ion-label>
+    <ion-item no-padding *ngFor="let option of investmentSectorOptions">
+      <ion-label color="light" >{{ option }}</ion-label>
+      <ion-checkbox color="light"  (ionChange)="updateInvestmentSectors($event.value, option)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-label  color="light" >Are you a qualified S 708 investor?</ion-label>
+    <ion-item no-padding>
+      <ion-label color="light"  >Yes</ion-label>
+      <ion-checkbox color="light"  [(ngModel)]="form.qualified708Investor"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <div class="button-container">
+    <button color="light"  (click)="submitForm()" ion-button full round margin-top>Submit</button>
+  </div>
+</ion-content>
